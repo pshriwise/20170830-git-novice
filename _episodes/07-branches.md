@@ -86,6 +86,34 @@ nothing to commit, working directory clean
 ~~~
 {: .output}
 
+We have now created a branch off of the *current version* of our branch, `master`.
+Any changes made to the `master` branch from this point on will not be part of the 
+`pythondev` branch. This is not a flaw but rather a feature of Git in that development
+in the `master` branch can continue without affecting changes being simultaneously made 
+in the `pythondev` branch.
+
+Let's show that this is true. First, we'll add a change to `mars.txt` in the `master` branch. 
+
+~~~
+$ nano mars.txt
+$ cat mars.txt
+$ git add mars.txt
+$ git commit -m "Adding a line about bat food sources on Mars"
+~~~
+{: .bash}
+
+~~~
+Cold and dry, but everything is my favorite color
+The two moons may be a problem for Wolfman
+But the Mummy will appreciate the lack of humidity
+Not much food for my pet bats here.
+
+[master yzx9uiv] Adding a line about bat food sources on Mars"
+ 1 file changed, 1 insertion(+)
+ create mode 100644 mars.txt
+~~~
+{: .output}
+
 To switch to our new branch we can use the `checkout` command
 we learned earlier and check our work with `git branch`.
 
@@ -113,8 +141,8 @@ a nickname to checkout a version of the repository that matches the most recent
 commit in that branch (a.k.a. the HEAD of that branch).
 
 Here you can use `git log` and `ls` to see that the history and 
-files are the same as our `master` branch. This will be true until
-some changes are committed to our new branch.
+files are the same as our `master` branch when we created the branch. 
+The commit we made related to Mars's atmosphere no longer exists.
 
 Now lets make our python script.  
 For simplicity sake, we will `touch` the script making an empty file
@@ -176,7 +204,10 @@ $ git log --oneline
 {: .bash}
 
 We no longer see the file `analysis.py` and our latest commit doesn't
-appear in this branch's history. But do not fear! All of our hard work
+appear in this branch's history. Our commit from before about bat food
+is still here, however.
+
+But do not fear! All of our hard work
 remains in the `pythondev` branch. We can confirm this by moving back
 to that branch.
 
